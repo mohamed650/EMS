@@ -1,0 +1,51 @@
+@charset "ISO-8859-1";
+.firstcontainer{
+	height: 50px;
+	background-color: grey;
+}
+#company-logo{
+	margin-left: 2px;
+	height: auto;
+	width: 50px;
+}
+#project-title{
+	margin-left: 2px;
+	display: inline-flex;
+	color: #fff;
+	font-size: 1.6em;
+	font-weight: bold;
+}
+.secondcontainer{
+	margin-top: 0px;
+	height: 37px;
+	background-color: #4169E1;
+}
+
+#logout{
+	display: inline-flex;
+	float: right;
+	color: #fff;
+	font-size: 1.3em;
+	margin:5px 15px 0px 0px;
+}
+.sub-secondcontainer{
+	display: inline-flex;
+	float: right;
+}
+.sub-secondcontainer #ul-items li{
+	display: inline-flex;
+	margin-right: 15px;
+	font-size: 1.1em;
+	font-weight: bold;
+	padding: 5px;
+}
+.sub-secondcontainer #ul-items li:hover{
+	background-color: #00BFFF;
+}
+.sub-secondcontainer #ul-items li a{
+	color: #fff;
+	text-decoration: none;
+}
+.active{
+	background-color: #00BFFF;
+}

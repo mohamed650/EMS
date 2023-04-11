@@ -1,0 +1,64 @@
+@charset "ISO-8859-1";
+
+.register-title{
+	margin-top: 10px;
+	margin-left: 5px;
+}
+.register-title p{
+	font-size: 1.5em;
+}
+
+.registerdiv{
+	margin-left: 250px;
+	margin-top: 50px;
+}
+.registerdiv .title{
+	border: none;
+	background: #ccc;
+	height: 35px;
+	width: 250px;
+}
+.registerdiv .title p{
+	margin: 3px;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+.registerdiv .title-box input{
+	margin: 3px;
+	outline: none;
+}
+.registerdiv .title-box span{
+	display: inline-flex;
+	color: red;
+	margin-left: 3px;
+}
+.registerdiv .title-box label{
+	margin-left: 3px;
+}
+.registerdiv .title-box input[type="radio"]{
+	margin-top: 10px;
+	margin-left: 10px;
+}
+.registerdiv .title-box select{
+	margin: 3px;
+	outline: none;
+}
+#PFAccountNo{
+	border: none;
+	font-weight: 480;
+	padding-left: 3px;
+}
+#IndianPhoneNo{
+	border: none;
+	font-weight: 480;
+	padding-left: 3px;
+}
+.registerdiv .form-btn1 #submitbtn{
+	width: 120px;
+	margin-left: 150px;
+	font-weight: bold;
+}
+.registerdiv .form-btn2 #resetbtn{
+	width: 120px;
+	font-weight: bold;
+}

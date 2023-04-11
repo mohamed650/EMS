@@ -1,0 +1,66 @@
+@charset "ISO-8859-1";
+body{
+	margin:0;
+	padding: 0;
+}
+.firstcontainer{
+	height: 50px;
+	background-color: grey;
+}
+#company-logo{
+	margin-left: 2px;
+	height: auto;
+	width: 50px;
+}
+#project-title{
+	margin-left: 2px;
+	display: inline-flex;
+	color: #fff;
+	font-size: 1.6em;
+	font-weight: bold;
+}
+.secondcontainer{
+	margin-top: 0px;
+	height: 35px;
+	background-color: #4169E1;
+}
+.title-div{
+	margin-top: 80px;
+	text-align: center;
+}
+.title-div p{
+	font-size: 2.2em;
+	opacity: 0.7;
+}
+.title-div .title-div1{
+	margin-top: 65px;
+	font-size: 1.2em;
+}
+.title-div .title-div1 input[type="text"]{
+	outline: none;
+	margin-left: 10px;
+	width: 300px;
+}
+.title-div .title-div1 span{
+	margin-left: 5px;
+	color: red;
+}
+.title-div .title-div2{
+	margin-top: 25px;
+	font-size: 1.2em;
+}
+.title-div .title-div2 span{
+	margin-left: 5px;
+	color: red;
+}
+.title-div .title-div2 input[type="password"]{
+	outline: none;
+	width: 300px;
+}
+.btn-div{
+	margin-top: 45px;
+}
+.btn-div .user-btn{
+	width: 80px;
+	margin-left: 35px;
+}

@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.scii.mapper.IMapper">
+	<resultMap type="RegisterModel" id="registerInfo">
+		<result property="Employee_Id" column="Employee_Id" />
+		<result property="EmployeeName" column="EmployeeName" />
+		<result property="FirstName" column="FirstName" />
+		<result property="LastName" column="LastName" />
+		<result property="Gender" column="Gender" />
+		<result property="DateofBirth" column="DateofBirth" />
+		<result property="Address" column="Address" />
+		<result property="Email_Id" column="Email_Id" />
+		<result property="ContactNumber" column="ContactNumber" />
+		<result property="Batch" column="Batch" />
+		<result property="DateofJoining" column="DateofJoining" />
+		<result property="DateofLeaving" column="DateofLeaving" />
+		<result property="Department_Id" column="Department_Id" />
+		<result property="Department_Name" column="Department_Name" />
+		<result property="Designation_Id" column="Designation_Id" />
+		<result property="Designation_Name" column="Designation_Name" />
+		<result property="Bank_Name" column="Bank_Name"/>
+		<result property="AccountNumber" column="AccountNumber" />
+		<result property="PfAccountNumber" column="PfAccountNumber" />
+		<result property="PAN" column="PAN" />
+		<result property="Discontinued" column="Discontinued" />
+	</resultMap>
+	<resultMap type="DepartmentModel" id="departmentInfo">
+		<result property="Department_Id" column="Department_Id"/>
+		<result property="Department_Name" column="Department_Name"/>
+	</resultMap>
+	<resultMap type="DesignationModel" id="designationInfo">
+		<result property="Designation_Id" column="Designation_Id"/>
+		<result property="Designation_Name" column="Designation_Name"/>
+	</resultMap>
+	<resultMap type="SalaryModel" id="salaryInfo">
+		<result property="Salary_Employee_Id" column="Salary_Employee_Id"/>
+		<result property="Salary_Month" column="Salary_Month"/>
+		<result property="Salary_Year" column="Salary_Year"/>
+		<result property="Basic_Salary" column="Basic_Salary"/>
+		<result property="Worked_Days" column="Worked_Days"/>
+		<result property="Sick_Leave" column="Sick_Leave"/>
+		<result property="Earned_Leave" column="Earned_Leave"/>
+	</resultMap>
+	<resultMap type="SalaryRetrievalModel" id = "salaryRetrievalInfo">
+		<result property="sl_no" column="sl_no"/>
+		<result property="EmployeeName" column="EmployeeName"/>
+		<result property="Employee_Id" column="Employee_Id"/>
+		<result property="Department_Name" column="Department_Name"/>
+		<result property="Designation_Name" column="Designation_Name"/>
+		<result property="Bank_Name" column="Bank_Name"/>
+		<result property="AccountNumber" column="AccountNumber"/>
+		<result property="PfAccountNumber" column="PfAccountNumber"/>
+		<result property="DateofJoining" column="DateofJoining"/>
+		<result property="Pay_Slip" column="Pay_Slip"/>
+		<result property="Worked_Days" column="Worked_Days"/>
+		<result property="Earned_Leave" column="Earned_Leave"/>
+		<result property="Sick_Leave" column="Sick_Leave"/>
+		<result property="Basic_Salary" column="Basic_Salary"/>
+	</resultMap>
+	
+	<select id="checkUser" parameterType="com.scii.model.RegisterModel" resultMap="registerInfo">
+		select
+			EMPLOYEE_ID
+		from
+			EMPLOYEES
+		<if test="Employee_Id != null">
+			where
+				EMPLOYEE_ID = #{Employee_Id}
+		</if>
+	</select>
+	
+	<select id="loadEmployeeDetails" parameterType="com.scii.model.RegisterModel" resultMap="registerInfo">
+		select
+			EMPLOYEE_ID,
+			CONCAT(FIRSTNAME,' ',LASTNAME) AS EMPLOYEENAME,
+			FIRSTNAME,
+			LASTNAME,
+			EMAIL_ID,
+			CONTACTNUMBER,
+			BATCH,
+			DATEOFJOINING,
+			DEPARTMENT_NAME,
+			DESIGNATION_NAME,
+			ADDRESS,
+			ACCOUNTNUMBER,
+			BANK_NAME,
+			PFACCOUNTNUMBER,
+			PAN,
+			GENDER,
+			DATEOFBIRTH
+		from
+			EMPLOYEES
+	</select>
+	
+	<select id="searchEmployeeDetails" parameterType="com.scii.model.RegisterModel" resultMap="registerInfo">
+		select
+			EMPLOYEE_ID,
+			CONCAT(FIRSTNAME,' ',LASTNAME) AS EMPLOYEENAME,
+			FIRSTNAME,
+			LASTNAME,
+			EMAIL_ID,
+			CONTACTNUMBER,
+			BATCH,
+			DATEOFJOINING,
+			DEPARTMENT_NAME,
+			DESIGNATION_NAME,
+			ADDRESS,
+			ACCOUNTNUMBER,
+			BANK_NAME,
+			PFACCOUNTNUMBER,
+			PAN,
+			GENDER,
+			DATEOFBIRTH,
+			DISCONTINUED
+		from
+			EMPLOYEES
+		where
+			 FIRSTNAME like '%'+#{FirstName}+'%' or
+			 DEPARTMENTNAME like '%'+#{Department_Name}+'%' or
+			 BATCH like '%'+#{Batch}+'%'
+	</select>
+	
+	<select id="loadDepartments" parameterType="com.scii.model.DepartmentModel" resultMap="departmentInfo">
+		select
+			DEPARTMENT_ID,
+			DEPARTMENT_NAME
+		from
+			DEPARTMENTS
+	</select>
+	
+	<select id="loadDesignations" parameterType="com.scii.model.DesignationModel" resultMap="designationInfo">
+		select
+			DESIGNATION_ID,
+			DESIGNATION_NAME
+		from
+			DESIGNATIONS
+	</select>
+	
+	<select id="checkMonthYear" parameterType="com.scii.model.SalaryModel" resultMap="salaryInfo">
+		select
+			SALARY_EMPLOYEE_ID,
+			SALARY_MONTH,
+			SALARY_YEAR,
+			BASIC_SALARY,
+			WORKED_DAYS,
+			SICK_LEAVE,
+			EARNED_LEAVE
+		from
+			SALARY
+		where
+			SALARY_EMPLOYEE_ID = #{Salary_Employee_Id} AND
+			SALARY_MONTH = #{Salary_Month} AND
+			SALARY_Year = #{Salary_Year}
+	</select>
+	
+	<select id="retrieveSalaryDetails" parameterType="com.scii.model.SalaryRetrievalModel" resultMap="salaryRetrievalInfo">
+		select
+			A.SL_NO,
+			A.EMPLOYEE_ID,
+			CONCAT(A.FIRSTNAME,' ',A.LASTNAME) AS EMPLOYEENAME,
+			A.DEPARTMENT_NAME,
+			A.DESIGNATION_NAME,
+			A.BANK_NAME,
+			A.ACCOUNTNUMBER,
+			A.PFACCOUNTNUMBER,
+			A.DATEOFJOINING,
+			CONCAT(B.SALARY_MONTH,'-',B.SALARY_YEAR) AS PAY_SLIP,
+			B.WORKED_DAYS,
+			B.EARNED_LEAVE,
+			B.SICK_LEAVE,
+			B.BASIC_SALARY
+		from
+			EMPLOYEES A
+		inner join
+			SALARY B
+		on
+			A.EMPLOYEE_ID = B.SALARY_EMPLOYEE_ID
+		where
+			A.EMPLOYEE_ID = #{Employee_Id} and
+			B.SALARY_MONTH = #{Salary_Month} and
+			B.SALARY_YEAR = #{Salary_Year}
+	</select>
+	
+	<insert id="insertUser" parameterType="com.scii.model.RegisterModel">
+		insert into
+		EMPLOYEES(
+			EMPLOYEE_ID,
+			FIRSTNAME,
+			LASTNAME,
+			GENDER,
+			DATEOFBIRTH,
+			ADDRESS,
+			EMAIL_ID,
+			CONTACTNUMBER,
+			BATCH,
+			DATEOFJOINING,
+			DEPARTMENT_ID,
+			DEPARTMENT_NAME,
+			DESIGNATION_ID,
+			DESIGNATION_NAME,
+			ACCOUNTNUMBER,
+			PFACCOUNTNUMBER,
+			PAN,
+			BANK_NAME)
+		values(
+			#{Employee_Id},
+			#{FirstName},
+			#{LastName},
+			#{Gender},
+			TO_DATE(#{DateofBirth}, 'YYYY/MM/DD'),
+			#{Address},
+			#{Email_Id},
+			#{ContactNumber},
+			#{Batch},
+			TO_DATE(#{DateofJoining}, 'YYYY/MM/DD'),
+			#{Department_Id},
+			#{Department_Name},
+			#{Designation_Id},
+			#{Designation_Name},
+			#{AccountNumber},
+			#{PfAccountNumber},
+			#{PAN},
+			#{Bank_Name})
+	</insert>
+	
+	<update id="updateUser" parameterType="com.scii.model.RegisterModel">
+		update
+			EMPLOYEES
+		set
+			FIRSTNAME = #{FirstName},
+			LASTNAME = #{LastName},
+			GENDER = #{Gender},
+			DATEOFBIRTH = TO_DATE(#{DateofBirth}, 'YYYY/MM/DD'),
+			ADDRESS = #{Address},
+			EMAIL_ID = #{Email_Id},			
+			CONTACTNUMBER = #{ContactNumber},
+			BATCH = #{Batch},
+			DATEOFJOINING = TO_DATE(#{DateofJoining}, 'YYYY/MM/DD'),
+			DATEOFLEAVING = TO_DATE(#{DateofLeaving}, 'YYYY/MM/DD'),
+			DEPARTMENT_ID = #{Department_Id},
+			DEPARTMENT_NAME = #{Department_Name},
+			DESIGNATION_ID = #{Designation_Id},
+			DESIGNATION_NAME = #{Designation_Name},
+			ACCOUNTNUMBER = #{AccountNumber},
+			PFACCOUNTNUMBER = #{PfAccountNumber},
+			PAN = #{PAN},
+			DISCONTINUED = CAST(#{Discontinued} AS BOOLEAN),
+			BANK_NAME = #{Bank_Name}
+		where
+			EMPLOYEE_ID = #{Employee_Id}
+	</update>
+	
+	<insert id="insertSalary" parameterType="com.scii.model.SalaryModel">
+		insert into
+		Salary(
+			SALARY_EMPLOYEE_ID,
+			SALARY_MONTH,
+			SALARY_YEAR,
+			BASIC_SALARY,
+			WORKED_DAYS,
+			SICK_LEAVE,
+			EARNED_LEAVE)
+		values(
+			#{Salary_Employee_Id},
+			#{Salary_Month},
+			#{Salary_Year},
+			#{Basic_Salary},
+			#{Worked_Days},
+			#{Sick_Leave},
+			#{Earned_Leave})
+	</insert>
+</mapper>

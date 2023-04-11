@@ -1,0 +1,96 @@
+@charset "ISO-8859-1";
+
+.salary-title{
+	margin-top: 10px;
+	margin-left: 5px;
+}
+.salary-title p{
+	font-size: 1.5em;
+}
+.schedular-border{
+	all: revert;
+	border-radius: 8px; 
+}
+#legend-title{
+	color: #7CB9E8;
+}
+.employeename-div{
+	display: inline-flex;
+	margin-left: 30px;
+}
+.employeename-div select{
+	margin-left: 5px;
+	width: 250px;
+	outline: none;
+}
+.salarymonth-div{
+	display: inline-flex;
+	margin-left: 30px;
+}
+.salarymonth-div select{
+	margin-left: 5px;
+	width: 250px;
+	outline: none;
+}
+.salaryyear-div{
+	display: inline-flex;
+	margin-left: 30px
+}
+.salaryyear-div select{
+	margin-left: 5px;
+	width: 250px;
+	outline: none;
+}
+.searchbtn-div{
+	display: inline-flex;
+	margin-left: 60px;
+}
+.searchbtn-div input{
+	width: 120px;
+}
+.salarysearchdiv label{
+	font-weight: bold;
+}
+
+.salarytablediv{
+	margin-top: 50px;
+}
+.salaryheadingdiv{
+	text-align: center;
+}
+#salaryheading{
+	font-weight: bold;
+	font-size: 1.6em;
+}
+#salarysubheading{
+	margin-top: -20px;
+	font-size: 1.2em;
+	opacity: 0.8;
+}
+.tablediv{
+	margin-left: 25px;
+	margin-right: 25px;
+}
+
+table, tr, td{
+	padding-top: 5px;
+	padding-left: 3px;
+}
+.firstcolwidth{
+	width: 180px;
+}
+.secondcolwidth td{
+	width: 180px;
+}
+.thirdcolwidth{
+	padding-left: 85px;
+}
+.signaturediv{
+	text-align: center;
+	margin-top: 45px;
+	font-size: 1.2em;
+	opacity: 0.8;
+}
+.salary-table-elements{
+	font-weight: bold;
+}

@@ -1,0 +1,126 @@
+@charset "ISO-8859-1";
+.employee-title{
+	margin-top: 10px;
+	margin-left: 5px;
+}
+.employee-title p{
+	font-size: 1.5em;
+}
+.schedular-border{
+	all: revert;
+	border-radius: 8px; 
+}
+#legend-title{
+	color: #7CB9E8;
+}
+.employeename-div{
+	display: inline-flex;
+	margin-left: 30px;
+}
+.employeename-div input{
+	margin-left: 5px;
+	width: 250px;
+	outline: none;
+}
+.department-div{
+	display: inline-flex;
+	margin-left: 50px;
+}
+.department-div select{
+	margin-left: 5px;
+	width: 250px;
+	outline: none;
+}
+.batch-div{
+	display: inline-flex;
+	margin-left: 50px;
+}
+.batch-div select{
+	margin-left: 5px;
+	width: 250px;
+	outline: none;
+}
+.searchbtn-div{
+	display: inline-flex;
+	margin-left: 60px;
+}
+.searchbtn-div input{
+	width: 120px;
+}
+.employeesearchdiv label{
+	font-weight: bold;
+}
+
+#tabulator-div{
+	margin-top: 50px;
+	margin-left: 45px;
+	margin-right: 45px;
+}
+.registerdiv .title p{
+	margin: 3px;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+.registerdiv .title-box input{
+	margin: 3px;
+	outline: none;
+}
+.registerdiv .title-box span{
+	display: inline-flex;
+	color: red;
+	margin-left: 3px;
+}
+.registerdiv .title-box label{
+	margin-left: 3px;
+}
+.registerdiv .title-box input[type="radio"]{
+	margin-top: 10px;
+	margin-left: 10px;
+}
+.registerdiv .title-box select{
+	margin: 3px;
+	outline: none;
+}
+#PFAccountNo{
+	border: none;
+	font-weight: 480;
+	padding-left: 3px;
+}
+#IndianPhoneNo{
+	border: none;
+	font-weight: 480;
+	padding-left: 3px;
+}
+
+
+/* Tabulator CSS*/
+
+/*Theme the Tabulator element*/
+#employeeTabulator{
+    background-color:#ccc;
+    border: 1px solid #333;
+    border-radius: 10px;
+}
+
+/*Theme the header*/
+#employeeTabulator .tabulator-header {
+    background-color:#333;
+    color:#1F75FE;
+}
+
+/*Allow column header names to wrap lines*/
+#employeeTabulator .tabulator-header .tabulator-col,
+#employeeTabulator .tabulator-header .tabulator-col-row-handle {
+    white-space: normal;
+}
+
+/*Color the table rows*/
+#employeeTabulator .tabulator-tableHolder .tabulator-table .tabulator-row{
+    color:#fff;
+    background-color: #666;
+}
+
+/*Color even rows*/
+#employeeTabulator .tabulator-tableHolder .tabulator-table .tabulator-row:nth-child(even) {
+    background-color: #6495ED;
+}
