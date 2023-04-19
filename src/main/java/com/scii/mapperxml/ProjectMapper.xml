@@ -116,9 +116,11 @@
 		from
 			EMPLOYEES
 		where
-			 FIRSTNAME like '%'+#{FirstName}+'%' or
-			 DEPARTMENTNAME like '%'+#{Department_Name}+'%' or
-			 BATCH like '%'+#{Batch}+'%'
+			 FIRSTNAME ILIKE '%' || #{FirstName} || '%' and
+			 DEPARTMENTNAME ILIKE '%' || #{Department_Name} || '%' and
+			 BATCH ILIKE '%' || #{Batch} || '%'
+			 "Batch like @batch"
+			 command.Parameters.AddWithValue("%"+objmodel.Batch+"%");
 	</select>
 	
 	<select id="loadDepartments" parameterType="com.scii.model.DepartmentModel" resultMap="departmentInfo">
