@@ -15,7 +15,7 @@ function onlyNumbers(event){
 
 function onlyAlphabets(event){
 	var asciiCode = (event.which) ? event.which : event.keyCode;
-	if((asciiCode > 64 && asciiCode < 91) || (asciiCode > 96 && asciiCode < 123)){
+	if((asciiCode > 64 && asciiCode < 91) || (asciiCode > 96 && asciiCode < 123) || asciiCode == 32){
 		return true;
 	}else{
 		return false;
@@ -61,6 +61,7 @@ function loadDesignationInfo(map){
 	}
 	$("#Designation").html(s);
 }
+
 function loadBatch(){
 	$.ajax({
 		type: 'POST',
@@ -160,16 +161,16 @@ function registerEmployee(){
 		params.AccountNumber =="" && params.PfAccountNumber =="" && params.PAN ==""){
 			alert("Fields cannot be Empty..");
 			return false;
-		}else if(params.Employee_Id == ""){
+		}else if(params.Employee_Id == "" || params.Employee_Id == null){
 			alert("Employee_Id cannot be null..");
 			return false;
-		}else if(params.FirstName == ""){
+		}else if(params.FirstName == "" || params.FirstName == null){
 			alert("First Name cannot be null..");
 			return false;
 		}else if(params.FirstName.match(notAllowedSpecials)){
 			alert("First Name cannot contain Special Characters..");
 			return false;
-		}else if(params.LastName == ""){
+		}else if(params.LastName == "" || params.LastName == null){
 			alert("Last Name cannot be null..");
 			return false;
 		}else if(params.LastName.match(notAllowedSpecials)){
@@ -178,22 +179,22 @@ function registerEmployee(){
 		}else if(!(radioOptions[0].checked || radioOptions[1].checked)){
 			alert("Please Select Your Gender..");
 			return false;
-		}else if(params.DateofBirth ==""){
+		}else if(params.DateofBirth == "" || params.DateofBirth == null){
 			alert("Date of Birth cannot be null..");
 			return false;
 		}else if(employeeAge < 18){
 			alert("Age should be above 18 years only...");
 			return false;
-		}else if(params.Address == ""){
+		}else if(params.Address == "" || params.Address == null){
 			alert("Address cannot be null..");
 			return false;
-		}else if(params.Email_Id ==""){
+		}else if(params.Email_Id =="" || params.Email_Id == null){
 			alert("EMail Id cannot be null..");
 			return false;
 		}else if(!(params.Email_Id.match(regex_pattern))){
 			alert("Invalid Email Id..");
 			return false;
-		}else if(params.ContactNumber == ""){
+		}else if(params.ContactNumber == "" || params.ContactNumber == null){
 			alert("Contact Number cannot be null..");
 			return false;
 		}else if(!(params.ContactNumber.substring(3,13).match(phoneValid))){
@@ -205,7 +206,7 @@ function registerEmployee(){
 		}else if(dobBatchDiff < 18){
 			alert("Difference Between Date of Birth and Batch should be above 18 years...");
 			return false;
-		}else if(params.DateofJoining == ""){
+		}else if(params.DateofJoining == "" || params.DateofJoining == null){
 			alert("Date of Joining cannot be null..");
 			return false;
 		}else if(dateJoiningDiff < 18){
@@ -220,13 +221,13 @@ function registerEmployee(){
 		}else if(params.Designation_Id == -1){
 			alert("Please Select Your Designation...");
 			return false;
-		}else if(params.AccountNumber == ""){
+		}else if(params.AccountNumber == "" || params.AccountNumber == null){
 			alert("Account Number cannit be null..");
 			return false;
-		}else if(params.PfAccountNumber.substring(13, PFAccountLength) ==""){
+		}else if(params.PfAccountNumber.substring(13, PFAccountLength) == "" || params.PfAccountNumber.substring(13, PFAccountLength) == null){
 			alert("PF Account Number cannot be null..");
 			return false;
-		}else if(params.PAN == ""){
+		}else if(params.PAN == "" || params.PAN == null){
 			alert("PAN cannot be null..");
 			return false;
 		}else {

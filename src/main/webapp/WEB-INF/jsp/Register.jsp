@@ -11,6 +11,7 @@
 <script src="/js/fontAwesome.js"></script>
 <script src="/js/jquery.js"></script>
 <script src="/js/Jquery1.16.0.js"></script>
+<script src="/js/NoConnection.js"></script>
 <jsp:include page="common/header.jsp"></jsp:include>
 <script src="/js/common.js"></script>
 </head>
@@ -142,7 +143,7 @@
 				</div>
 				<div class="col-md-9 title-box">
 					<input type="text" id="PFAccountNo" style="width: 120px;" value="KN/PNY/XXXXX/" disabled/>
-					<input type="text" id="PFAccountNumber" style="width: 150px;"/>
+					<input type="text" id="PFAccountNumber" style="width: 150px;" maxlength="4"/>
 				</div>
 			</div>
 			<div class="row g-0" style="margin-top: 2.5px;">
@@ -150,7 +151,7 @@
 					<p>PAN</p>
 				</div>
 				<div class="col-md-9 title-box">
-					<input type="text" id="PAN" style="width: 280px;"/>
+					<input type="text" id="PAN" style="width: 280px;" maxlength="10"/>
 				</div>
 			</div>
 			<div class="row g-0" style="margin-top: 18px; margin-bottom: 20px;">

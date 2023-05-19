@@ -10,6 +10,7 @@
 <script src="/js/fontAwesome.js"></script>
 <script src="/js/jquery.js"></script>
 <script src="/js/Jquery1.16.0.js"></script>
+<script src="/js/NoConnection.js"></script>
 </head>
 <body>
 <div class="maincontainer">

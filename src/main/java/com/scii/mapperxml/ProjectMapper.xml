@@ -40,12 +40,15 @@
 		<result property="Basic_Salary" column="Basic_Salary"/>
 		<result property="Worked_Days" column="Worked_Days"/>
 		<result property="Sick_Leave" column="Sick_Leave"/>
+		<result property="Used_Sick_Leave" column="Used_Sick_Leave"/>
 		<result property="Earned_Leave" column="Earned_Leave"/>
+		<result property="Used_Earned_Leave" column="Used_Earned_Leave"/>
 	</resultMap>
 	<resultMap type="SalaryRetrievalModel" id = "salaryRetrievalInfo">
 		<result property="sl_no" column="sl_no"/>
 		<result property="EmployeeName" column="EmployeeName"/>
 		<result property="Employee_Id" column="Employee_Id"/>
+		<result property="Email_Id" column="Email_Id"/>
 		<result property="Department_Name" column="Department_Name"/>
 		<result property="Designation_Name" column="Designation_Name"/>
 		<result property="Bank_Name" column="Bank_Name"/>
@@ -55,7 +58,9 @@
 		<result property="Pay_Slip" column="Pay_Slip"/>
 		<result property="Worked_Days" column="Worked_Days"/>
 		<result property="Earned_Leave" column="Earned_Leave"/>
+		<result property="Used_Earned_Leave" column="Used_Earned_Leave"/>
 		<result property="Sick_Leave" column="Sick_Leave"/>
+		<result property="Used_Sick_Leave" column="Used_Sick_Leave"/>
 		<result property="Basic_Salary" column="Basic_Salary"/>
 	</resultMap>
 	
@@ -88,9 +93,12 @@
 			PFACCOUNTNUMBER,
 			PAN,
 			GENDER,
-			DATEOFBIRTH
+			DATEOFBIRTH,
+			DISCONTINUED
 		from
 			EMPLOYEES
+		where
+			DISCONTINUED = '0'
 	</select>
 	
 	<select id="searchEmployeeDetails" parameterType="com.scii.model.RegisterModel" resultMap="registerInfo">
@@ -116,8 +124,8 @@
 		from
 			EMPLOYEES
 		where
-			 FIRSTNAME ILIKE '%' || #{FirstName} || '%' and
-			 DEPARTMENTNAME ILIKE '%' || #{Department_Name} || '%' and
+			 FIRSTNAME ILIKE '%' || #{FirstName} || '%' or
+			 DEPARTMENT_NAME ILIKE '%' || #{Department_Name} || '%' or
 			 BATCH ILIKE '%' || #{Batch} || '%'
 	</select>
 	
@@ -139,19 +147,37 @@
 	
 	<select id="checkMonthYear" parameterType="com.scii.model.SalaryModel" resultMap="salaryInfo">
 		select
-			SALARY_EMPLOYEE_ID,
-			SALARY_MONTH,
-			SALARY_YEAR,
-			BASIC_SALARY,
-			WORKED_DAYS,
-			SICK_LEAVE,
-			EARNED_LEAVE
+			A.SALARY_EMPLOYEE_ID,
+			A.SALARY_MONTH,
+			A.SALARY_YEAR,
+			A.BASIC_SALARY,
+			A.WORKED_DAYS,
+			B.SICK_LEAVE,
+			B.USED_SICK_LEAVE,
+			B.EARNED_LEAVE,
+			B.USED_EARNED_LEAVE
 		from
-			SALARY
+			SALARY A
+		inner join
+			EMPLOYEE_LEAVES B
+		on A.SALARY_EMPLOYEE_ID = B.SALARY_EMPLOYEE_ID
 		where
-			SALARY_EMPLOYEE_ID = #{Salary_Employee_Id} AND
-			SALARY_MONTH = #{Salary_Month} AND
-			SALARY_Year = #{Salary_Year}
+			A.SALARY_EMPLOYEE_ID = #{Salary_Employee_Id} AND
+			A.SALARY_MONTH = #{Salary_Month} AND
+			A.SALARY_Year = #{Salary_Year}
+	</select>
+
+	<select id="retrieveLeaves" parameterType="com.scii.model.SalaryModel" resultMap="salaryInfo">
+		select
+			SALARY_EMPLOYEE_ID,
+			SICK_LEAVE,
+			USED_SICK_LEAVE,
+			EARNED_LEAVE,
+			USED_EARNED_LEAVE
+		from
+			EMPLOYEE_LEAVES
+		where
+			SALARY_EMPLOYEE_ID = #{Salary_Employee_Id}
 	</select>
 	
 	<select id="retrieveSalaryDetails" parameterType="com.scii.model.SalaryRetrievalModel" resultMap="salaryRetrievalInfo">
@@ -159,6 +185,9 @@
 			A.SL_NO,
 			A.EMPLOYEE_ID,
 			CONCAT(A.FIRSTNAME,' ',A.LASTNAME) AS EMPLOYEENAME,
+			A.FIRSTNAME,
+			A.LASTNAME,
+			A.EMAIL_ID,
 			A.DEPARTMENT_NAME,
 			A.DESIGNATION_NAME,
 			A.BANK_NAME,
@@ -167,8 +196,10 @@
 			A.DATEOFJOINING,
 			CONCAT(B.SALARY_MONTH,'-',B.SALARY_YEAR) AS PAY_SLIP,
 			B.WORKED_DAYS,
-			B.EARNED_LEAVE,
-			B.SICK_LEAVE,
+			C.EARNED_LEAVE,
+			C.USED_EARNED_LEAVE,
+			C.SICK_LEAVE,
+			C.USED_SICK_LEAVE,
 			B.BASIC_SALARY
 		from
 			EMPLOYEES A
@@ -176,10 +207,40 @@
 			SALARY B
 		on
 			A.EMPLOYEE_ID = B.SALARY_EMPLOYEE_ID
+		inner join
+			EMPLOYEE_LEAVES C
+		on
+			B.SALARY_EMPLOYEE_ID = C.SALARY_EMPLOYEE_ID
 		where
 			A.EMPLOYEE_ID = #{Employee_Id} and
 			B.SALARY_MONTH = #{Salary_Month} and
 			B.SALARY_YEAR = #{Salary_Year}
+	</select>
+
+	<select id="loadDiscontinuedEmployeeDetails" parameterType="com.scii.model.RegisterModel" resultMap="registerInfo">
+		select
+			EMPLOYEE_ID,
+			CONCAT(FIRSTNAME,' ',LASTNAME) AS EMPLOYEENAME,
+			FIRSTNAME,
+			LASTNAME,
+			EMAIL_ID,
+			CONTACTNUMBER,
+			BATCH,
+			DATEOFJOINING,
+			DEPARTMENT_NAME,
+			DESIGNATION_NAME,
+			ADDRESS,
+			ACCOUNTNUMBER,
+			BANK_NAME,
+			PFACCOUNTNUMBER,
+			PAN,
+			GENDER,
+			DATEOFBIRTH,
+			DISCONTINUED
+		from
+			EMPLOYEES
+		where
+			DISCONTINUED = '1'
 	</select>
 	
 	<insert id="insertUser" parameterType="com.scii.model.RegisterModel">
@@ -202,7 +263,8 @@
 			ACCOUNTNUMBER,
 			PFACCOUNTNUMBER,
 			PAN,
-			BANK_NAME)
+			BANK_NAME,
+			DISCONTINUED)
 		values(
 			#{Employee_Id},
 			#{FirstName},
@@ -221,7 +283,8 @@
 			#{AccountNumber},
 			#{PfAccountNumber},
 			#{PAN},
-			#{Bank_Name})
+			#{Bank_Name},
+			#{Discontinued})
 	</insert>
 	
 	<update id="updateUser" parameterType="com.scii.model.RegisterModel">
@@ -245,7 +308,7 @@
 			ACCOUNTNUMBER = #{AccountNumber},
 			PFACCOUNTNUMBER = #{PfAccountNumber},
 			PAN = #{PAN},
-			DISCONTINUED = CAST(#{Discontinued} AS BOOLEAN),
+			DISCONTINUED = #{Discontinued},
 			BANK_NAME = #{Bank_Name}
 		where
 			EMPLOYEE_ID = #{Employee_Id}
@@ -258,16 +321,39 @@
 			SALARY_MONTH,
 			SALARY_YEAR,
 			BASIC_SALARY,
-			WORKED_DAYS,
-			SICK_LEAVE,
-			EARNED_LEAVE)
+			WORKED_DAYS)
 		values(
 			#{Salary_Employee_Id},
 			#{Salary_Month},
 			#{Salary_Year},
 			#{Basic_Salary},
-			#{Worked_Days},
-			#{Sick_Leave},
-			#{Earned_Leave})
+			#{Worked_Days})
 	</insert>
+	<insert id="insertLeaves" parameterType="com.scii.model.SalaryModel">
+		insert into
+		EMPLOYEE_LEAVES(
+			SALARY_EMPLOYEE_ID,
+			SICK_LEAVE,
+			USED_SICK_LEAVE,
+			EARNED_LEAVE,
+			USED_EARNED_LEAVE)
+		values(
+			#{Salary_Employee_Id},
+			#{Sick_Leave},
+			#{Used_Sick_Leave},
+			#{Earned_Leave},
+			#{Used_Earned_Leave})
+	</insert>
+
+	<update id="updateLeaves" parameterType="com.scii.model.SalaryModel">
+		update
+			EMPLOYEE_LEAVES
+		set
+			SICK_LEAVE = #{Sick_Leave},
+			USED_SICK_LEAVE = #{Used_Sick_Leave},
+			EARNED_LEAVE = #{Earned_Leave},
+			USED_EARNED_LEAVE = #{Used_Earned_Leave}
+		where
+			SALARY_EMPLOYEE_ID = #{Salary_Employee_Id}
+	</update>
 </mapper>

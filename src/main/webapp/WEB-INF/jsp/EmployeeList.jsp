@@ -12,7 +12,9 @@
 <script src="/js/fontAwesome.js"></script>
 <script src="/js/jquery.js"></script>
 <script src="/js/Jquery1.16.0.js"></script>
+<script src="/js/jquery3.3.1.js"></script>
 <script src="/js/Tabulator.js"></script>
+<script src="/js/NoConnection.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <jsp:include page="common/header.jsp"></jsp:include>
 <script src="/js/common.js"></script>
@@ -176,7 +178,7 @@
 										<option value="1">SBI</option>
 										<option value="2">IDBI</option>
 									</select>
-									<input type="text" id="AccountNumber" style="width: 280px;"/>
+									<input type="text" id="AccountNumber" style="width: 280px;" maxlength="11"/>
 								</div>
 							</div>
 							<div class="row g-0" style="margin-top: 2px;">
@@ -185,7 +187,7 @@
 								</div>
 								<div class="col-md-9 title-box">
 									<input type="text" id="PFAccountNo" style="width: 120px;" value="KN/PNY/XXXXX/" disabled/>
-									<input type="text" id="PFAccountNumber" style="width: 150px;"/>
+									<input type="text" id="PFAccountNumber" style="width: 150px;" maxlength="4"/>
 								</div>
 							</div>
 							<div class="row g-0" style="margin-top: 2.5px;">
@@ -193,7 +195,7 @@
 									<p>PAN</p>
 								</div>
 								<div class="col-md-9 title-box">
-									<input type="text" id="PAN" style="width: 280px;"/>
+									<input type="text" id="PAN" style="width: 280px;" maxlength="10"/>
 								</div>
 							</div>
 							<div class="row g-0" style="margin-top: 2px;">
@@ -270,6 +272,12 @@
 								<div class="col-md-9 title-box">
 									<input type="text" id="Sick_Leave" style="width: 200px;"/>
 								</div>
+								<div class="col-md-3 title">
+									<p>Used Sick Leave</p>
+								</div>
+								<div class="col-md-9 title-box">
+									<input type="text" id="Used_Sick_Leave" style="width: 200px;"/>
+								</div>
 							</div>
 							<div class="row g-0" style="margin-top: 2.5px;">
 								<div class="col-md-3 title">
@@ -277,6 +285,12 @@
 								</div>
 								<div class="col-md-9 title-box">
 									<input type="text" id="Earned_Leave" style="width: 200px;"/>
+								</div>
+								<div class="col-md-3 title">
+									<p>Earned Leave</p>
+								</div>
+								<div class="col-md-9 title-box">
+									<input type="text" id="Used_Earned_Leave" style="width: 200px;"/>
 								</div>
 							</div>
 						</form>

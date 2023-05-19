@@ -16,7 +16,7 @@
 }
 .employeename-div{
 	display: inline-flex;
-	margin-left: 30px;
+	margin-left: 15px;
 }
 .employeename-div select{
 	margin-left: 5px;
@@ -43,7 +43,7 @@
 }
 .searchbtn-div{
 	display: inline-flex;
-	margin-left: 60px;
+	margin-left: 20px;
 }
 .searchbtn-div input{
 	width: 120px;
@@ -93,4 +93,10 @@ table, tr, td{
 }
 .salary-table-elements{
 	font-weight: bold;
+}
+
+.mailbutton{
+	margin-top: 20px;
+	float: right;
+	margin-right: 22px;
 }

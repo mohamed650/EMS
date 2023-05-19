@@ -11,5 +11,7 @@ public class SalaryModel {
 	private String Basic_Salary;
 	private String Worked_Days;
 	private String Sick_Leave;
+	private String Used_Sick_Leave;
 	private String Earned_Leave;
+	private String Used_Earned_Leave;
 }

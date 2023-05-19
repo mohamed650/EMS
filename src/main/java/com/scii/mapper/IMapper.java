@@ -28,8 +28,16 @@ public interface IMapper {
 	public int updateUser(RegisterModel updateUser);
 	
 	public int insertSalary(SalaryModel insertSalary);
+
+	public List<SalaryModel> retrieveLeaves(SalaryModel getLeaves);
+
+	public int insertLeaves(SalaryModel insertLeaves);
+
+	public int updateLeaves(SalaryModel updateLeaves);
 	
 	public List<SalaryRetrievalModel> retrieveSalaryDetails(SalaryRetrievalModel retrieveSalaryDetails);
 	
 	public List<RegisterModel> searchEmployeeDetails(RegisterModel searchEmployee);
+
+	public List<RegisterModel> loadDiscontinuedEmployeeDetails(RegisterModel loadEmployee);
 }

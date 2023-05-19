@@ -32,6 +32,8 @@ $(document).ready(function(){
 						$("#Worked_Days").val("");
 						$("#Sick_Leave").val("");
 						$("#Earned_Leave").val("");
+						$("#Used_Sick_Leave").val("");
+						$("#Used_Earned_Leave").val("");
 						document.getElementById("insertSalaryBtn").style.display = "block";
 						return false;
 					}else {
@@ -41,6 +43,8 @@ $(document).ready(function(){
 							$("#Worked_Days").val(response[data][++i]);
 							$("#Sick_Leave").val(response[data][++i]);
 							$("#Earned_Leave").val(response[data][++i]);
+							$("#Used_Sick_Leave").val(response[data][++i]);
+							$("#Used_Earned_Leave").val(response[data][++i]);
 						}
 						document.getElementById("insertSalaryBtn").style.display = "none";
 					}
@@ -71,6 +75,7 @@ function searchTabulator(){
 			dataType: 'json',
 			success: function(response){
 				alert(response)
+				console.log(response);
 			}
 		});
 	}
@@ -216,28 +221,30 @@ let upbtn = function(value, data, cell, row, options){
 
 let upbtncallback = function(e, cell, value, data){
 	var select = cell.getRow().getData();
-	console.log(select)
 	alert(select.employee_Id);
-	document.getElementById("Employee_Id").value = select.employee_Id;
+	document.getElementById("Employee_Id").value = select.employee_Id.trim();
 	$("#Employee_Id").prop("disabled", true);
-	document.getElementById("FirstName").value = select.firstName;
-	document.getElementById("LastName").value = select.lastName;
+	document.getElementById("FirstName").value = select.firstName.trim();
+	document.getElementById("LastName").value = select.lastName.trim();
 	$("input[name='gender'][value="+select.gender+"]").prop('checked', true);
 	$("#DateofBirth").val(select.dateofBirth);
-	document.getElementById("Address").value = select.address;
-	document.getElementById("Email_Id").value = select.email_Id;
+	document.getElementById("Address").value = select.address.trim();
+	document.getElementById("Email_Id").value = select.email_Id.trim();
 	document.getElementById("ContactNumber").value = select.contactNumber.substring(3, 13);
 	sessionStorage.setItem("BatchList", select.batch);
 	loadBatchList();
 	$("#DateofJoining").val(select.dateofJoining);
+	var today = new Date();
+	today = today.getFullYear()+"-"+('0' + (today.getMonth() + 1)).slice(-2)+"-"+('0' + today.getDate()).slice(-2);
+	$("#DateofLeaving").prop("min", today);
 	sessionStorage.setItem("DepartmentList", select.department_Name);
 	loadDepartmentList();
 	sessionStorage.setItem("DesignationList", select.designation_Name);
 	loadDesignationList();
-	$("#bankOption :selected").text(select.bank_Name);
-	document.getElementById("AccountNumber").value = select.accountNumber;
+	$("#bankOption :selected").text(select.bank_Name.trim());
+	document.getElementById("AccountNumber").value = select.accountNumber.trim();
 	document.getElementById("PFAccountNumber").value = select.pfAccountNumber.substring(13);
-	document.getElementById("PAN").value = select.pan;
+	document.getElementById("PAN").value = select.pan.trim();
 	$("#EmployeeUpdate").modal("show");
 };
 
@@ -253,11 +260,14 @@ function updateEmployeeDetails(){
 	var selectBatch = $("#Batch").val();
 	var discontinuedCheckbox = document.getElementById("Discontinued");
 	if(discontinuedCheckbox.checked){
-		alert("Checked");
-		checkboxFlag = true;
+		if(params.DateofLeaving == "" || params.DateofLeaving == null){
+			alert("Please Select of Date of Relieving!...");
+			return false;
+		}else{
+			checkboxFlag = 1;
+		}
 	}else{
-		alert("Not Checked");
-		checkboxFlag = false;
+		checkboxFlag = 0;
 	}
 	var params = {
 		Employee_Id : $("#Employee_Id").val(),
@@ -387,8 +397,10 @@ let salbtncallback = function(e, cell, value, data){
 	var currentdate = new Date();
 	if(currentdate.getTime() < dateAfterEightMonths.getTime()){
 		document.getElementById("Sick_Leave").disabled = true;
+		document.getElementById("Used_Sick_Leave").disabled = true;
 	}else{
 		document.getElementById("Sick_Leave").disabled = false;
+		document.getElementById("Used_Sick_Leave").disabled = false;
 	}
 	
 	var dateofJoinAfterTwenty = new Date(select.dateofJoining);
@@ -397,8 +409,10 @@ let salbtncallback = function(e, cell, value, data){
 	var dateAfterTwentyMonths = new Date(afterdojTwenty);
 	if(currentdate.getTime() < dateAfterTwentyMonths.getTime()){
 		document.getElementById("Earned_Leave").disabled = true;
+		document.getElementById("Used_Earned_Leave").disabled = true;
 	}else{
 		document.getElementById("Earned_Leave").disabled = false;
+		document.getElementById("Used_Earned_Leave").disabled = false;
 	}
 	$("#SalaryModal").modal("show");
 }
@@ -413,7 +427,9 @@ function insertSalaryDetails(){
 		Basic_Salary : $("#Basic_Salary").val(),
 		Worked_Days : $("#Worked_Days").val(),
 		Sick_Leave : $("#Sick_Leave").val(),
-		Earned_Leave : $("#Earned_Leave").val()
+		Used_Sick_Leave : $("#Used_Sick_Leave").val(),
+		Earned_Leave : $("#Earned_Leave").val(),
+		Used_Earned_Leave : $("#Used_Earned_Leave").val()
 	};
 	if(salaryMonth == -1 && salaryYear == -1){
 		alert("Please Select Both Fields...");
@@ -455,7 +471,7 @@ function loadEmployeeTable(){
 		layout:"fitColumns",
 		height: "360px",
 		rowFormatter:function(row){
-			if(row.getData().discontinued == true){
+			if(row.getData().discontinued == 1){
 				row.getElement().style.backgroundColor = "#ffbe33";
 				row.getElement().style.pointerEvents = "none"; 
 			}
@@ -489,6 +505,7 @@ function loadEmployeeTable(){
 		{title:"Last Name", field:"lastName", visible: false},
 		{title:"PAN", field:"pan", visible: false},
 		{title:"Gender", field:"gender", visible: false},
+		{title:"Discontinued", field:"discontinued", visible: false},
 		{title:"", formatter:upbtn, cellClick: upbtncallback, width: 100},
 		{title:"", formatter:salbtn, cellClick: salbtncallback, width: 100},
 		],
@@ -502,6 +519,8 @@ function closeSalaryModal(){
 	$("#Worked_Days").val("");
 	$("#Sick_Leave").val("");
 	$("#Earned_Leave").val("");
+	$("#Used_Sick_Leave").val("");
+	$("#Used_Earned_Leave").val("");
 	document.getElementById("insertSalaryBtn").style.display = "block";
 }
 

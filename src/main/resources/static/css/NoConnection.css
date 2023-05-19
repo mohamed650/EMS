@@ -1,0 +1,28 @@
+.maincontainer{
+    margin: 0;
+    padding: 0;
+}
+.imagecontainer{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+.imagecontainer img{
+    width: 600px;
+    height: 600px;
+}
+.img-text{
+    margin-top: -12%;
+    margin-left: 2%;
+}
+.img-text .title{
+    font-size: 2.8em;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    opacity: 0.8;
+}
+.img-text .text{
+    font-size: 1.2em;
+    margin-top: -2%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    opacity: 0.8;
+}

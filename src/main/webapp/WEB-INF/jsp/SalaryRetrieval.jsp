@@ -13,6 +13,8 @@
 <script src="/js/jquery.js"></script>
 <script src="/js/Jquery1.16.0.js"></script>
 <script src="/js/Tabulator.js"></script>
+<script src="/js/html2Canvas.js"></script>
+<script src="/js/NoConnection.js"></script>
 <jsp:include page="common/header.jsp"></jsp:include>
 <script src="/js/common.js"></script>
 </head>
@@ -41,7 +43,10 @@
 			</div>
 		</fieldset>
 	</div>
-	<div class="salarytablediv">
+	<div class="mailbutton">
+		<input type="button" onclick="takeScreenshot()" value="Send Mail">
+	</div>
+	<div class="salarytablediv" id="salary-div">
 		<div class="salaryheadingdiv">
 			<p id="salaryheading">SCII System Consultant Information India Pvt.Ltd</p>
 			<p id="salarysubheading">Plot No: Spl-17, Anthrasanahalli, KSSIDC Industrial Complex 2nd Stage Madhugiri Road, Arakere P.O. Tumkur - 572106</p>
@@ -67,8 +72,8 @@
 					<td class="salary-table-elements">Bank A/c.#</td>
 					<td colspan="2" id="bank-accountno"></td>
 					<td class="salary-table-elements">Earned Leave</td>
-					<td>0.0</td>
-					<td>0.0</td>
+					<td id="bal-earnedleave">0.0</td>
+					<td id="used-earnedleave">0.0</td>
 				</tr>
 				<tr>
 					<td class="firstcolwidth salary-table-elements">Department</td>
@@ -76,8 +81,8 @@
 					<td class="salary-table-elements">PF A/c.#</td>
 					<td colspan="2" id="pf-accountno"></td>
 					<td class="salary-table-elements">Sick Leave</td>
-					<td>0.0</td>
-					<td>0.0</td>
+					<td id="bal-sickleave">0.0</td>
+					<td id="used-sickleave">0.0</td>
 				</tr>
 				<tr>
 					<td class="firstcolwidth salary-table-elements">Designation</td>

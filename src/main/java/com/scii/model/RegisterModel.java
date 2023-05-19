@@ -25,5 +25,5 @@ public class RegisterModel {
 	private String AccountNumber;
 	private String PfAccountNumber;
 	private String PAN;
-	private String Discontinued;
+	private int Discontinued;
 }

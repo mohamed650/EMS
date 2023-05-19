@@ -15,7 +15,7 @@
 }
 .employeename-div{
 	display: inline-flex;
-	margin-left: 30px;
+	margin-left: 15px;
 }
 .employeename-div input{
 	margin-left: 5px;
@@ -24,7 +24,7 @@
 }
 .department-div{
 	display: inline-flex;
-	margin-left: 50px;
+	margin-left: 30px;
 }
 .department-div select{
 	margin-left: 5px;
@@ -33,7 +33,7 @@
 }
 .batch-div{
 	display: inline-flex;
-	margin-left: 50px;
+	margin-left: 30px;
 }
 .batch-div select{
 	margin-left: 5px;
@@ -42,7 +42,7 @@
 }
 .searchbtn-div{
 	display: inline-flex;
-	margin-left: 60px;
+	margin-left: 20px;
 }
 .searchbtn-div input{
 	width: 120px;
@@ -91,7 +91,9 @@
 	font-weight: 480;
 	padding-left: 3px;
 }
-
+#Discontinued{
+	margin-top: 12px;
+}
 
 /* Tabulator CSS*/
 

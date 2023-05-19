@@ -68,6 +68,10 @@ function retrieveSalary(){
 						$("#salarytotal-a").html("0.00");
 						$("#salarytotal-b").html("0.00");
 						$("#salarytotal-paid").html("0.00");
+						$("#bal-sickleave").html("0.0");
+						$("#used-sickleave").html("0.0");
+						$("#bal-earnedleave").html("0.0");
+						$("#used-earnedleave").html("0.0");
 					return false;
 				}else{
 					for(data in response){
@@ -92,10 +96,65 @@ function retrieveSalary(){
 						$("#salarytotal-a").html(response[data][++i]);
 						$("#salarytotal-b").html(response[data][++i]);
 						$("#salarytotal-paid").html(response[data][++i]);
+						var balSickLeave = response[data][++i];
+						var usedSickLeave = response[data][++i];
+						var balEarnedLeave = response[data][++i];
+						var usedEarnedLeave = response[data][++i];
+						console.log(balEarnedLeave);
+						if(balSickLeave != "" && balSickLeave != null){
+							$("#bal-sickleave").html(balSickLeave);
+						}else{
+							$("#bal-sickleave").html("0.0");
+						}
+						if(usedSickLeave != "" && usedSickLeave != null){
+							$("#used-sickleave").html(usedSickLeave);
+						}else{
+							$("#used-sickleave").html("0.0");
+						}
+						if(balEarnedLeave != "" && balEarnedLeave != null){
+							$("#bal-earnedleave").html(balEarnedLeave);
+						}else{
+							$("#bal-earnedleave").html("0.0");
+						}
+						if(usedEarnedLeave != "" && usedEarnedLeave != null){
+							$("#used-earnedleave").html(usedEarnedLeave);
+						}else{
+							$("#used-earnedleave").html("0.0");
+						}
+						
 					}
 				}
 			}
 		});
 	}
 	
+}
+
+
+function takeScreenshot(){
+	html2canvas(document.getElementById("salary-div")).then(canvas => {
+		var url = canvas.toDataURL();
+		console.log(url);
+		sendSalaryMail(url);
+	});
+}
+
+function sendSalaryMail(url){
+	var params = {
+		url: url
+	}
+	$.ajax({
+		type: 'POST',
+		url: '/sendSalaryMail',
+		data: params,
+		dataType: 'json',
+		success: function(response){
+			if(response.MESSAGE === "SUCCESS"){
+				alert("Mail Sent Successfully...");
+			}else{
+				alert("Error Occurred!...");
+				return false;
+			}
+		}
+	})
 }
