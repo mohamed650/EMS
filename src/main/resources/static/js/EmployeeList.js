@@ -260,7 +260,8 @@ function updateEmployeeDetails(){
 	var selectBatch = $("#Batch").val();
 	var discontinuedCheckbox = document.getElementById("Discontinued");
 	if(discontinuedCheckbox.checked){
-		if(params.DateofLeaving == "" || params.DateofLeaving == null){
+		var DateofLeaving = $("#DateofLeaving").val();
+		if(DateofLeaving == "" || DateofLeaving == null){
 			alert("Please Select of Date of Relieving!...");
 			return false;
 		}else{
@@ -470,12 +471,6 @@ function loadEmployeeTable(){
 	table = new Tabulator("#employeeTabulator", {
 		layout:"fitColumns",
 		height: "360px",
-		rowFormatter:function(row){
-			if(row.getData().discontinued == 1){
-				row.getElement().style.backgroundColor = "#ffbe33";
-				row.getElement().style.pointerEvents = "none"; 
-			}
-		},
 		pagination: "local",
     	paginationSize: 10,
     	paginationSizeSelector: [3, 6, 8, 10],
@@ -495,6 +490,7 @@ function loadEmployeeTable(){
 		{title:"Contact Number", field:"contactNumber"},
 		{title:"Batch", field:"batch", hozAlign:"center", headerFilter: true},
 		{title:"Date of Joining", field:"dateofJoining", hozAlign:"center"},
+		{title:"Date of Leaving", field:"dateofLeaving", hozAlign:"center", visible: false},
 		{title:"Department Name", field:"department_Name", headerFilter: true},
 		{title:"Designation Name", field:"designation_Name"},
 		{title:"Address", field:"address", visible: false},
@@ -506,8 +502,8 @@ function loadEmployeeTable(){
 		{title:"PAN", field:"pan", visible: false},
 		{title:"Gender", field:"gender", visible: false},
 		{title:"Discontinued", field:"discontinued", visible: false},
-		{title:"", formatter:upbtn, cellClick: upbtncallback, width: 100},
-		{title:"", formatter:salbtn, cellClick: salbtncallback, width: 100},
+		{title:"Update", hozAlign:"center", formatter:upbtn, cellClick: upbtncallback, width: 100},
+		{title:"Salary", hozAlign:"center", formatter:salbtn, cellClick: salbtncallback, width: 100},
 		],
 	});
 }

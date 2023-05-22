@@ -85,6 +85,7 @@
 			CONTACTNUMBER,
 			BATCH,
 			DATEOFJOINING,
+			DATEOFLEAVING,
 			DEPARTMENT_NAME,
 			DESIGNATION_NAME,
 			ADDRESS,
@@ -147,37 +148,36 @@
 	
 	<select id="checkMonthYear" parameterType="com.scii.model.SalaryModel" resultMap="salaryInfo">
 		select
-			A.SALARY_EMPLOYEE_ID,
-			A.SALARY_MONTH,
-			A.SALARY_YEAR,
-			A.BASIC_SALARY,
-			A.WORKED_DAYS,
-			B.SICK_LEAVE,
-			B.USED_SICK_LEAVE,
-			B.EARNED_LEAVE,
-			B.USED_EARNED_LEAVE
-		from
-			SALARY A
-		inner join
-			EMPLOYEE_LEAVES B
-		on A.SALARY_EMPLOYEE_ID = B.SALARY_EMPLOYEE_ID
-		where
-			A.SALARY_EMPLOYEE_ID = #{Salary_Employee_Id} AND
-			A.SALARY_MONTH = #{Salary_Month} AND
-			A.SALARY_Year = #{Salary_Year}
-	</select>
-
-	<select id="retrieveLeaves" parameterType="com.scii.model.SalaryModel" resultMap="salaryInfo">
-		select
 			SALARY_EMPLOYEE_ID,
+			SALARY_MONTH,
+			SALARY_YEAR,
+			BASIC_SALARY,
+			WORKED_DAYS,
 			SICK_LEAVE,
 			USED_SICK_LEAVE,
 			EARNED_LEAVE,
 			USED_EARNED_LEAVE
 		from
-			EMPLOYEE_LEAVES
+			SALARY
+		where
+			SALARY_EMPLOYEE_ID = #{Salary_Employee_Id} AND
+			SALARY_MONTH = #{Salary_Month} AND
+			SALARY_Year = #{Salary_Year}
+	</select>
+
+	<select id="retrieveLeaves" parameterType="com.scii.model.SalaryModel" resultMap="salaryInfo">
+		select
+			SALARY_EMPLOYEE_ID,
+			MAX(SICK_LEAVE) SICK_LEAVE,
+			MAX(USED_SICK_LEAVE) USED_SICK_LEAVE,
+			MAX(EARNED_LEAVE) EARNED_LEAVE,
+			MAX(USED_EARNED_LEAVE) USED_EARNED_LEAVE
+		from
+			SALARY
 		where
 			SALARY_EMPLOYEE_ID = #{Salary_Employee_Id}
+		group by
+			SALARY_EMPLOYEE_ID
 	</select>
 	
 	<select id="retrieveSalaryDetails" parameterType="com.scii.model.SalaryRetrievalModel" resultMap="salaryRetrievalInfo">
@@ -196,10 +196,10 @@
 			A.DATEOFJOINING,
 			CONCAT(B.SALARY_MONTH,'-',B.SALARY_YEAR) AS PAY_SLIP,
 			B.WORKED_DAYS,
-			C.EARNED_LEAVE,
-			C.USED_EARNED_LEAVE,
-			C.SICK_LEAVE,
-			C.USED_SICK_LEAVE,
+			B.EARNED_LEAVE,
+			B.USED_EARNED_LEAVE,
+			B.SICK_LEAVE,
+			B.USED_SICK_LEAVE,
 			B.BASIC_SALARY
 		from
 			EMPLOYEES A
@@ -207,10 +207,6 @@
 			SALARY B
 		on
 			A.EMPLOYEE_ID = B.SALARY_EMPLOYEE_ID
-		inner join
-			EMPLOYEE_LEAVES C
-		on
-			B.SALARY_EMPLOYEE_ID = C.SALARY_EMPLOYEE_ID
 		where
 			A.EMPLOYEE_ID = #{Employee_Id} and
 			B.SALARY_MONTH = #{Salary_Month} and
@@ -227,6 +223,7 @@
 			CONTACTNUMBER,
 			BATCH,
 			DATEOFJOINING,
+			DATEOFLEAVING,
 			DEPARTMENT_NAME,
 			DESIGNATION_NAME,
 			ADDRESS,
@@ -321,24 +318,17 @@
 			SALARY_MONTH,
 			SALARY_YEAR,
 			BASIC_SALARY,
-			WORKED_DAYS)
-		values(
-			#{Salary_Employee_Id},
-			#{Salary_Month},
-			#{Salary_Year},
-			#{Basic_Salary},
-			#{Worked_Days})
-	</insert>
-	<insert id="insertLeaves" parameterType="com.scii.model.SalaryModel">
-		insert into
-		EMPLOYEE_LEAVES(
-			SALARY_EMPLOYEE_ID,
+			WORKED_DAYS,
 			SICK_LEAVE,
 			USED_SICK_LEAVE,
 			EARNED_LEAVE,
 			USED_EARNED_LEAVE)
 		values(
 			#{Salary_Employee_Id},
+			#{Salary_Month},
+			#{Salary_Year},
+			#{Basic_Salary},
+			#{Worked_Days},
 			#{Sick_Leave},
 			#{Used_Sick_Leave},
 			#{Earned_Leave},

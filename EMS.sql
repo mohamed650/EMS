@@ -42,15 +42,11 @@ Salary_Month character(25) not null,
 Salary_Year character(25) not null,
 Basic_Salary character(25) not null,
 Worked_Days character(25) not null,
-primary key(Salary_Employee_Id, Salary_Month, Salary_Year)
-);
-
-create table EMPLOYEE_LEAVES(
-Salary_Employee_Id character(25) not null primary key,
 Sick_Leave character(25),
 Used_Sick_Leave character(25),
 Earned_Leave character(25),
-Used_Earned_Leave character(25)
+Used_Earned_Leave character(25),
+primary key(Salary_Employee_Id, Salary_Month, Salary_Year)
 );
 
 

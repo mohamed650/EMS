@@ -130,12 +130,6 @@ public class IServiceImplementation implements IService {
 	}
 
 	@Override
-	public int insertLeaves(SalaryModel insertLeaves) {
-		int status = imapper.insertLeaves(insertLeaves);
-		return status;
-	}
-
-	@Override
 	public List<SalaryModel> retrieveLeaves(SalaryModel getLeaves) {
 		List<SalaryModel> leaveList = imapper.retrieveLeaves(getLeaves);
 		return leaveList;

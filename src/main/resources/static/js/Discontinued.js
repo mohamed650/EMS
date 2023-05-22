@@ -4,9 +4,17 @@ $(document).ready(function(){
 
 var table;
 function loadDiscontinuedEmployeeList(){
+	var today = new Date();
+	today = today.getFullYear()+"-"+('0' + (today.getMonth() + 1)).slice(-2)+"-"+('0' + today.getDate()).slice(-2);
     table = new Tabulator("#discontinued-employeeTabulator", {
 		layout:"fitColumns",
 		height: "360px",
+		rowFormatter:function(row){
+			if(row.getData().dateofLeaving == today){
+				row.getElement().style.backgroundColor = "#ffbe33";
+				row.getElement().style.pointerEvents = "none"; 
+			}
+		},
 		pagination: "local",
     	paginationSize: 10,
     	paginationSizeSelector: [3, 6, 8, 10],
@@ -26,6 +34,7 @@ function loadDiscontinuedEmployeeList(){
 		{title:"Contact Number", field:"contactNumber"},
 		{title:"Batch", field:"batch", hozAlign:"center", headerFilter: true},
 		{title:"Date of Joining", field:"dateofJoining", hozAlign:"center"},
+		{title:"Date of Leaving", field:"dateofLeaving", hozAlign:"center", visible: false},
 		{title:"Department Name", field:"department_Name", headerFilter: true},
 		{title:"Designation Name", field:"designation_Name"},
 		{title:"Address", field:"address", visible: false},

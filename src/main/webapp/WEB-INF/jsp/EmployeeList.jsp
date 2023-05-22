@@ -72,7 +72,7 @@
 									<p>First Name</p>
 								</div>
 								<div class="col-md-9 title-box">
-									<input type="text" id="FirstName" style="width: 430px;"/>
+									<input type="text" id="FirstName" style="width: 430px;" onkeypress="return onlyAlphabets(event)"/>
 									<span>&#42</span>
 								</div>
 							</div>
@@ -81,7 +81,7 @@
 									<p>Last Name</p>
 								</div>
 								<div class="col-md-9 title-box">
-									<input type="text" id="LastName" style="width: 430px;"/>
+									<input type="text" id="LastName" style="width: 430px;" onkeypress="return onlyAlphabets(event)"/>
 								</div>
 							</div>
 							<div class="row g-0" style="margin-top: 2px;">
@@ -124,7 +124,7 @@
 								</div>
 								<div class="col-md-9 title-box">
 									<input type="text" id="IndianPhoneNo" style="width: 40px" value="+91" disabled/>
-									<input type="tel" id="ContactNumber" maxlength=10 style="width: 230px;"/>
+									<input type="tel" id="ContactNumber" maxlength=10 style="width: 230px;" onkeypress="return onlyNumbers(event)"/>
 									<span>&#42</span>
 								</div>
 							</div>
@@ -252,7 +252,7 @@
 									<p>Basic Salary</p>
 								</div>
 								<div class="col-md-9 title-box">
-									<input type="text" id="Basic_Salary" style="width: 200px;"/>
+									<input type="text" id="Basic_Salary" style="width: 200px;" onkeypress="return onlyNumbers(event)"/>
 									<span>&#42</span>
 								</div>
 							</div>
@@ -261,7 +261,7 @@
 									<p>Worked Days</p>
 								</div>
 								<div class="col-md-9 title-box">
-									<input type="text" id="Worked_Days" style="width: 200px;"/>
+									<input type="text" id="Worked_Days" style="width: 200px;" onkeypress="return onlyNumbers(event)"/>
 									<span>&#42</span>
 								</div>
 							</div>
@@ -270,13 +270,13 @@
 									<p>Sick Leave</p>
 								</div>
 								<div class="col-md-9 title-box">
-									<input type="text" id="Sick_Leave" style="width: 200px;"/>
+									<input type="text" id="Sick_Leave" style="width: 200px;" onkeypress="return onlyNumbers(event)"/>
 								</div>
 								<div class="col-md-3 title">
 									<p>Used Sick Leave</p>
 								</div>
 								<div class="col-md-9 title-box">
-									<input type="text" id="Used_Sick_Leave" style="width: 200px;"/>
+									<input type="text" id="Used_Sick_Leave" style="width: 200px;" onkeypress="return onlyNumbers(event)"/>
 								</div>
 							</div>
 							<div class="row g-0" style="margin-top: 2.5px;">
@@ -284,13 +284,13 @@
 									<p>Earned Leave</p>
 								</div>
 								<div class="col-md-9 title-box">
-									<input type="text" id="Earned_Leave" style="width: 200px;"/>
+									<input type="text" id="Earned_Leave" style="width: 200px;" onkeypress="return onlyNumbers(event)"/>
 								</div>
 								<div class="col-md-3 title">
-									<p>Earned Leave</p>
+									<p>Used Earned Leave</p>
 								</div>
 								<div class="col-md-9 title-box">
-									<input type="text" id="Used_Earned_Leave" style="width: 200px;"/>
+									<input type="text" id="Used_Earned_Leave" style="width: 200px;" onkeypress="return onlyNumbers(event)"/>
 								</div>
 							</div>
 						</form>

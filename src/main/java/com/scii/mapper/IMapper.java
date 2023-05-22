@@ -31,8 +31,6 @@ public interface IMapper {
 
 	public List<SalaryModel> retrieveLeaves(SalaryModel getLeaves);
 
-	public int insertLeaves(SalaryModel insertLeaves);
-
 	public int updateLeaves(SalaryModel updateLeaves);
 	
 	public List<SalaryRetrievalModel> retrieveSalaryDetails(SalaryRetrievalModel retrieveSalaryDetails);

@@ -27,8 +27,6 @@ public interface IService {
 	public int insertSalary(SalaryModel insertSalary);
 
 	public List<SalaryModel> retrieveLeaves(SalaryModel getLeaves);
-
-	public int insertLeaves(SalaryModel insertLeaves);
 	
 	public int updateLeaves(SalaryModel updateLeaves);
 	
