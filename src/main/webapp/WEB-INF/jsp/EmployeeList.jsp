@@ -215,7 +215,7 @@
       			</div>
       			<div class="modal-footer">
         			<button type="button" class="btn btn-outline-info waves-effect" data-bs-dismiss="modal"><spring:message code="ems.button.modalClose"/></button>
-        			<button type="button" class="btn btn-info" onclick="updateEmployeeDetails()"><spring:message code="ems.button.modalSave"/></button>
+        			<button type="button" id="modalUpdateEmployee" class="btn btn-info"><spring:message code="ems.button.modalSave"/></button>
       			</div>
     		</div>
   		</div>
@@ -302,7 +302,7 @@
       			</div>
       			<div class="modal-footer">
         			<button type="button" class="btn btn-outline-info waves-effect" data-bs-dismiss="modal" onclick="closeSalaryModal()"><spring:message code="ems.button.modalClose"/></button>
-        			<button type="button" class="btn btn-info" id="insertSalaryBtn" onclick="insertSalaryDetails()"><spring:message code="ems.button.modalSave"/></button>
+        			<button type="button" class="btn btn-info" id="insertSalaryBtn"><spring:message code="ems.button.modalSave"/></button>
       			</div>
     		</div>
   		</div>

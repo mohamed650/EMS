@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -502,4 +503,36 @@ public class MainController {
 		}
 		return password.toString();
 	}
+
+
+	@GetMapping("/checkSession")
+	public @ResponseBody void checkSession(HttpServletRequest request ,HttpServletResponse response){
+		try {
+			Map<String, String> map = new HashMap<String, String>();
+			HttpSession httpSession = request.getSession(false);
+			if(httpSession == null){
+				map.put("MESSAGE", "EXPIRED");
+			}else{
+				map.put("MESSAGE", "ALIVE");
+			}
+			String json = gson.toJson(map);
+			response.getWriter().print(json);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@GetMapping("/logout")
+	public @ResponseBody Object logout(HttpSession httpSession){
+		try {
+			ModelAndView modelAndView = new ModelAndView();
+			httpSession.invalidate();
+			modelAndView.setViewName("Login");
+			return modelAndView;
+		} catch (Exception e) {
+			return e.getMessage();
+		}
+	}
+
+	
 }

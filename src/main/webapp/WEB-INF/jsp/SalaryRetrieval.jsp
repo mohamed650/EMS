@@ -47,7 +47,7 @@
 		</fieldset>
 	</div>
 	<div class="mailbutton">
-		<input type="button" onclick="takeScreenshot()" value=<spring:message code="ems.label.salaryRetrieval.sendMail"/>>
+		<input type="button" id="paySlipMail" value=<spring:message code="ems.label.salaryRetrieval.sendMail"/>>
 	</div>
 	<div class="salarytablediv" id="salary-div">
 		<div class="salaryheadingdiv">

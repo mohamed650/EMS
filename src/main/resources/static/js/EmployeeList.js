@@ -3,58 +3,74 @@ $(document).ready(function(){
 	loadMonths();
 	
 	$("#CheckDate").on('click', function(){
-		var salaryMonth = $("#Salary_Month").val();
-		var salaryYear = $("#Salary_Year").val();
-		var params = {
-			Salary_Employee_Id: $("#Salary_Employee_Id").val(),
-			Salary_Month: $("#Salary_Month :selected").text(),
-			Salary_Year: $("#Salary_Year :selected").text()
-		};
-		if(salaryMonth == -1 && salaryYear == -1){
-			alert("Please Select Both Fields...");
-			return false;
-		}else if(salaryMonth == -1 && salaryYear != -1){
-			alert("Please Select Month...");
-			return false;
-		}else if(salaryMonth != -1 && salaryYear == -1){
-			alert("Please Select Year...");
-			return false;
-		}else{
-			$.ajax({
-				type: 'POST',
-				url: '/checkMonthYear',
-				data: params,
-				dataType: 'json',
-				success: function(response){
-					if(response.MESSAGE == "SALARYNOTEXIST"){
-						alert("Salary Does Not Exist for Particular Month and Year!..");
-						$("#Basic_Salary").val("");
-						$("#Worked_Days").val("");
-						$("#Sick_Leave").val("");
-						$("#Earned_Leave").val("");
-						$("#Used_Sick_Leave").val("");
-						$("#Used_Earned_Leave").val("");
-						document.getElementById("insertSalaryBtn").style.display = "block";
-						return false;
-					}else {
-						for(data in response){
-							var i = 0;
-							$("#Basic_Salary").val(response[data][i]);
-							$("#Worked_Days").val(response[data][++i]);
-							$("#Sick_Leave").val(response[data][++i]);
-							$("#Earned_Leave").val(response[data][++i]);
-							$("#Used_Sick_Leave").val(response[data][++i]);
-							$("#Used_Earned_Leave").val(response[data][++i]);
-						}
-						document.getElementById("insertSalaryBtn").style.display = "none";
-					}
-				}
-			});
-		}
-		
-	
+		$.ajax({
+            type: 'GET',
+            url: '/checkSession',
+            dataType: 'json',
+            success: function(response){
+                console.log(response.MESSAGE)
+                if(response.MESSAGE === "ALIVE"){
+                    console.log(response.MESSAGE)
+                    checkMonthYear();
+                }else{
+                    alert("Session Timed Out, Please Login Once again!...");
+                    window.location.href="/";
+                }
+            }
+        });
 	});
 });
+
+function checkMonthYear(){
+	var salaryMonth = $("#Salary_Month").val();
+	var salaryYear = $("#Salary_Year").val();
+	var params = {
+		Salary_Employee_Id: $("#Salary_Employee_Id").val(),
+		Salary_Month: $("#Salary_Month :selected").text(),
+		Salary_Year: $("#Salary_Year :selected").text()
+	};
+	if(salaryMonth == -1 && salaryYear == -1){
+		alert("Please Select Both Fields...");
+		return false;
+	}else if(salaryMonth == -1 && salaryYear != -1){
+		alert("Please Select Month...");
+		return false;
+	}else if(salaryMonth != -1 && salaryYear == -1){
+		alert("Please Select Year...");
+		return false;
+	}else{
+		$.ajax({
+			type: 'POST',
+			url: '/checkMonthYear',
+			data: params,
+			dataType: 'json',
+			success: function(response){
+				if(response.MESSAGE == "SALARYNOTEXIST"){
+					alert("Salary Does Not Exist for Particular Month and Year!..");
+					$("#Basic_Salary").val("");
+					$("#Worked_Days").val("");
+					$("#Sick_Leave").val("");
+					$("#Earned_Leave").val("");
+					$("#Used_Sick_Leave").val("");
+					$("#Used_Earned_Leave").val("");
+					document.getElementById("insertSalaryBtn").style.display = "block";
+					return false;
+				}else {
+					for(data in response){
+						var i = 0;
+						$("#Basic_Salary").val(response[data][i]);
+						$("#Worked_Days").val(response[data][++i]);
+						$("#Sick_Leave").val(response[data][++i]);
+						$("#Earned_Leave").val(response[data][++i]);
+						$("#Used_Sick_Leave").val(response[data][++i]);
+						$("#Used_Earned_Leave").val(response[data][++i]);
+					}
+					document.getElementById("insertSalaryBtn").style.display = "none";
+				}
+			}
+		});
+	}
+}
 
 function searchTabulator(){
 	selDept = $("#SelectDepartment :selected").val();
@@ -245,6 +261,24 @@ let upbtncallback = function(e, cell, value, data){
 	$("#EmployeeUpdate").modal("show");
 };
 
+$("#modalUpdateEmployee").on('click', function(){
+	$.ajax({
+		type: 'GET',
+		url: '/checkSession',
+		dataType: 'json',
+		success: function(response){
+			console.log(response.MESSAGE)
+			if(response.MESSAGE === "ALIVE"){
+				console.log(response.MESSAGE)
+				updateEmployeeDetails();
+			}else{
+				alert("Session Timed Out, Please Login Once again!...");
+				window.location.href="/";
+			}
+		}
+	});
+});
+
 function updateEmployeeDetails(){
 	var checkboxFlag;
 	var pfAccountNumber = $("#PFAccountNo").val();
@@ -414,6 +448,24 @@ let salbtncallback = function(e, cell, value, data){
 	}
 	$("#SalaryModal").modal("show");
 }
+
+$("#insertSalaryBtn").on('click', function(){
+	$.ajax({
+		type: 'GET',
+		url: '/checkSession',
+		dataType: 'json',
+		success: function(response){
+			console.log(response.MESSAGE)
+			if(response.MESSAGE === "ALIVE"){
+				console.log(response.MESSAGE)
+				insertSalaryDetails();
+			}else{
+				alert("Session Timed Out, Please Login Once again!...");
+				window.location.href="/";
+			}
+		}
+	});
+});
 
 function insertSalaryDetails(){
 	var salaryMonth = $("#Salary_Month").val();

@@ -22,6 +22,24 @@ function loadEmployeeNameInfo(map){
 	$("#SearchEmployeeName").html(s);
 }
 
+$("#SearchButton").on('click', function(){
+	$.ajax({
+		type: 'GET',
+		url: '/checkSession',
+		dataType: 'json',
+		success: function(response){
+			console.log(response.MESSAGE)
+			if(response.MESSAGE === "ALIVE"){
+				console.log(response.MESSAGE)
+				retrieveSalary();
+			}else{
+				alert("Session Timed Out, Please Login Once again!...");
+				window.location.href="/";
+			}
+		}
+	});
+})
+
 function retrieveSalary(){
 	var params = {
 		Employee_Id : $("#SearchEmployeeName").val(),
@@ -127,8 +145,25 @@ function retrieveSalary(){
 			}
 		});
 	}
-	
 }
+
+$("#paySlipMail").on('click', function(){
+	$.ajax({
+		type: 'GET',
+		url: '/checkSession',
+		dataType: 'json',
+		success: function(response){
+			console.log(response.MESSAGE)
+			if(response.MESSAGE === "ALIVE"){
+				console.log(response.MESSAGE)
+				takeScreenshot();
+			}else{
+				alert("Session Timed Out, Please Login Once again!...");
+				window.location.href="/";
+			}
+		}
+	});
+})
 
 
 function takeScreenshot(){
