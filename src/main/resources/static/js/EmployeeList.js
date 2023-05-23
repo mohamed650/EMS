@@ -74,7 +74,6 @@ function searchTabulator(){
 			data: params,
 			dataType: 'json',
 			success: function(response){
-				alert(response)
 				console.log(response);
 			}
 		});
@@ -95,7 +94,6 @@ function loadBatchList(){
 
 function loadBatchYearsList(map){
 	var batchList = sessionStorage.getItem("BatchList");
-	console.log(batchList);
 	var s = '<option value="-1">Please Select Batch</option>';
 	for(var i=0; i<map.length; i++){
 		if(map[i] == batchList){
@@ -221,7 +219,6 @@ let upbtn = function(value, data, cell, row, options){
 
 let upbtncallback = function(e, cell, value, data){
 	var select = cell.getRow().getData();
-	alert(select.employee_Id);
 	document.getElementById("Employee_Id").value = select.employee_Id.trim();
 	$("#Employee_Id").prop("disabled", true);
 	document.getElementById("FirstName").value = select.firstName.trim();

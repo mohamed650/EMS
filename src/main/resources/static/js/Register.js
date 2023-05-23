@@ -189,7 +189,7 @@ function registerEmployee(){
 			alert("Address cannot be null..");
 			return false;
 		}else if(params.Email_Id =="" || params.Email_Id == null){
-			alert("EMail Id cannot be null..");
+			alert("Email Id cannot be null..");
 			return false;
 		}else if(!(params.Email_Id.match(regex_pattern))){
 			alert("Invalid Email Id..");
@@ -241,7 +241,7 @@ function registerEmployee(){
 						alert("Employee Registered Successfully..");
 						window.location.href="/employeeList";
 					}else if(response.MESSAGE == "USEREXIST"){
-						alert("EMployee Already Exist..");
+						alert("Employee Already Exist..");
 						return false;
 					}else{
 						alert("Unable to Register Employee..");

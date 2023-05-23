@@ -334,16 +334,5 @@
 			#{Earned_Leave},
 			#{Used_Earned_Leave})
 	</insert>
-
-	<update id="updateLeaves" parameterType="com.scii.model.SalaryModel">
-		update
-			EMPLOYEE_LEAVES
-		set
-			SICK_LEAVE = #{Sick_Leave},
-			USED_SICK_LEAVE = #{Used_Sick_Leave},
-			EARNED_LEAVE = #{Earned_Leave},
-			USED_EARNED_LEAVE = #{Used_Earned_Leave}
-		where
-			SALARY_EMPLOYEE_ID = #{Salary_Employee_Id}
-	</update>
+	
 </mapper>

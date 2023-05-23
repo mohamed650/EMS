@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<link rel="icon" type="image/x-icon" href="/images/scii-icon.jpg" />
+<title><spring:message code="ems.label.discontinued.title"/></title>
 <link rel="stylesheet" href="/css/EmployeeList.css">
 <link rel="stylesheet" href="/css/Cssboot.css">
 <link rel="stylesheet" href="/css/common.css">
@@ -21,25 +24,25 @@
 <body>
 <div class="discontinuedcontainer">
 	<div  class="employee-title">
-		<p>List of Discontinued Employees</p>
+		<p><spring:message code="ems.label.discontinued.heading"/></p>
 	</div>
 	<div class="employeesearchdiv">
 		<fieldset class="schedular-border">
-			<legend class="schedular-border" id="legend-title">Search Condition</legend>
+			<legend class="schedular-border" id="legend-title"><spring:message code="ems.label.discontinued.searchCondition"/></legend>
 			<div class="employeename-div">
-				<label>Employee Name:</label>
+				<label><spring:message code="ems.label.employeeName"/></label>
 				<input type="text" id="SearchEmployeeName"/>
 			</div>
 			<div class="batch-div">
-				<label>Batch:</label>
+				<label><spring:message code="ems.label.batch"/></label>
 				<select id="SelectBatch"></select>
 			</div>
 			<div class="department-div">
-				<label>Department:</label>
+				<label><spring:message code="ems.label.department"/></label>
 				<select id="SelectDepartment"></select>
 			</div>
 			<div class="searchbtn-div">
-				 <input type="button" id="SearchButton" onclick="searchTabulator()" value="Search"/>
+				 <input type="button" id="SearchButton" value=<spring:message code="ems.button.search"/> onclick="searchTabulator()" />
 			</div>
 		</fieldset>
 	</div>

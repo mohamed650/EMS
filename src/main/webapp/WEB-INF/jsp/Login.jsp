@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<link rel="icon" type="image/x-icon" href="/images/scii-icon.jpg" />
+<title><spring:message code="ems.label.login.loginTitle"/></title>
 <link rel="stylesheet" href="/css/Login.css">
 <link rel="stylesheet" href="/css/Cssboot.css">
 <script src="/js/fontAwesome.js"></script>
@@ -16,24 +19,24 @@
 <div class="maincontainer">
 	<div class="firstcontainer">
 		<img alt="logo" src="/images/sciilogo.jpg" id="company-logo">
-		<p id="project-title">Employee Management System</p>
+		<p id="project-title"><spring:message code="ems.label.projectTitle"/></p>
 	</div>
 	<div class="secondcontainer">
 	</div>
 	<div class="title-div">
-		<p>Login for Employee Management System</p>
+		<p><spring:message code="ems.label.login.loginHeader"/></p>
 		<form>
 			<div class="title-div1">
-				<label>LoginID :</label>
-				<input type="text" class="user-input" id="Login_Id"/><span>&#42</span>
+				<label><spring:message code="ems.label.login.loginId"/></label>
+				<input type="text" class="user-input" id="Login_Id"/><span><spring:message code="ems.label.asterisk"/></span>
 			</div>
 			<div class="title-div2">
-				<label>Password :</label>
-				<input type="password" class="user-input" id="Password"/><span>&#42</span>
+				<label><spring:message code="ems.label.login.password"/></label>
+				<input type="password" class="user-input" id="Password"/><span><spring:message code="ems.label.asterisk"/></span>
 			</div>
 			<div class="btn-div">
-				<input type="button" class="user-btn" value="Login" onclick="loginValidate()"/>
-				<input type="reset" class="user-btn" value="Reset"/>
+				<input type="button" class="user-btn" value=<spring:message code="ems.button.login"/> onclick="loginValidate()"/>
+				<input type="reset" value=<spring:message code="ems.button.reset"/> class="user-btn" />
 			</div>
 		</form>		
 	</div>
