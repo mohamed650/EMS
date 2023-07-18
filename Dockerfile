@@ -8,8 +8,8 @@ COPY src ./src
 RUN mvn package -DskipTests
 
 # Stage 2: Run stage
-FROM openjdk:17-slim
-COPY --from=build /app/target/ems.jar /app/ems.jar
+FROM tomcat:9-jdk17-openjdk-slim
+COPY --from=build /app/target/ems.war /usr/local/tomcat/webapps/
 
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "/app/ems.jar"]
+CMD ["catalina.sh", "run"]
