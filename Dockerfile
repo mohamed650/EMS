@@ -9,7 +9,7 @@ RUN mvn package -DskipTests
 
 # Stage 2: Run stage
 FROM tomcat:9-jdk17-openjdk-slim
-COPY --from=build /app/target/ems.war /usr/local/tomcat/webapps/
+COPY --from=build /app/target/ems-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps/
 
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
