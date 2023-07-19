@@ -15,9 +15,9 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.collections4.MultiMap;
 import org.apache.commons.collections4.map.MultiValueMap;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+// import org.apache.logging.log4j.Level;
+// import org.apache.logging.log4j.LogManager;
+// import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -49,7 +49,7 @@ public class MainController {
 	
 	private static final DecimalFormat df = new DecimalFormat("0.00");
 
-	private static final Logger logger = LogManager.getLogger(MainController.class.getName());
+	// private static final Logger logger = LogManager.getLogger(MainController.class.getName());
 
 	Gson gson = new Gson();
 	
@@ -110,7 +110,8 @@ public class MainController {
 			String json = gson.toJson(map);
 			response.getWriter().print(json);
 		} catch (Exception e) {
-			logger.log(Level.ERROR, e);
+			// logger.log(Level.ERROR, e);
+            e.printStackTrace();
 		}
 	}
 	
@@ -126,7 +127,8 @@ public class MainController {
 			String json = gson.toJson(map);
 			response.getWriter().print(json);
 		} catch (Exception e) {
-			logger.log(Level.ERROR, e);
+			// logger.log(Level.ERROR, e);
+            e.printStackTrace();
 		}
 	}
 	
@@ -144,7 +146,7 @@ public class MainController {
 		} catch (Exception e) {
 			List<String> exceptionList = new ArrayList<>();
 			exceptionList.add("Exception Occured!!!");
-			logger.log(Level.ERROR, e);
+			// logger.log(Level.ERROR, e);
 			return exceptionList;
 		}
 	}
@@ -168,9 +170,10 @@ public class MainController {
 			}
 			String json = gson.toJson(map);
 			response.getWriter().print(json);
-			logger.log(Level.INFO, map.get("MESSAGE"));
+			// logger.log(Level.INFO, map.get("MESSAGE"));
 		} catch (Exception e) {
-			logger.log(Level.ERROR, e);
+			// logger.log(Level.ERROR, e);
+            e.printStackTrace();
 		}
 	}
 	
@@ -187,9 +190,10 @@ public class MainController {
 			}
 			String json = gson.toJson(map);
 			response.getWriter().print(json);
-			logger.log(Level.INFO, map.get("MESSAGE"));
+			// logger.log(Level.INFO, map.get("MESSAGE"));
 		} catch (Exception e) {
-			logger.log(Level.ERROR, e);
+			// logger.log(Level.ERROR, e);
+            e.printStackTrace();
 		}
 	}
 	
@@ -210,12 +214,13 @@ public class MainController {
 				}
 			}else{
 				map.put("MESSAGE", "EMPLOYEENOTEXIST");
-				logger.log(Level.INFO, map.get("MESSAGE"));
+				// logger.log(Level.INFO, map.get("MESSAGE"));
 			}
 			String json = gson.toJson(map);
 			response.getWriter().print(json);
 		} catch (Exception e) {
-			logger.log(Level.ERROR, e);
+			// logger.log(Level.ERROR, e);
+            e.printStackTrace();
 		}
 	}
 	
@@ -244,12 +249,13 @@ public class MainController {
 				}
 			}else {
 				multimap.put("MESSAGE", "SALARYNOTEXIST");
-				logger.log(Level.INFO, multimap.get("MESSAGE"));
+				// logger.log(Level.INFO, multimap.get("MESSAGE"));
 			}
 			String json = gson.toJson(multimap);
 			response.getWriter().print(json);
 		} catch (Exception e) {
-			logger.log(Level.ERROR, e);
+			// logger.log(Level.ERROR, e);
+            e.printStackTrace();
 		}
 	}
 	
@@ -308,9 +314,10 @@ public class MainController {
 			}	
 			String json = gson.toJson(map);
 			response.getWriter().print(json);
-			logger.log(Level.INFO, map.get("MESSAGE"));
+			// logger.log(Level.INFO, map.get("MESSAGE"));
 		} catch (Exception e) {
-			logger.log(Level.ERROR, e);
+			// logger.log(Level.ERROR, e);
+            e.printStackTrace();
 		}
 		
 	}
@@ -417,12 +424,13 @@ public class MainController {
 				}
 			}else {
 				multiMap.put("MESSAGE", "SALARYDOESNOTEXIST");
-				logger.log(Level.INFO, multiMap.get("MESSAGE"));
+				// logger.log(Level.INFO, multiMap.get("MESSAGE"));
 			}
 			String json = gson.toJson(multiMap);
 			response.getWriter().print(json);
 		} catch (Exception e) {
-			logger.log(Level.ERROR, e);
+			// logger.log(Level.ERROR, e);
+            e.printStackTrace();
 		}
 	}
 	
@@ -487,9 +495,10 @@ public class MainController {
 			}
 			String json = gson.toJson(map);
 			response.getWriter().print(json);
-			logger.log(Level.INFO, map.get("MESSAGE"));
+			// logger.log(Level.INFO, map.get("MESSAGE"));
 		} catch (Exception e) {
-			logger.log(Level.ERROR, e);
+			// logger.log(Level.ERROR, e);
+            e.printStackTrace();
 		}
 	}
 
